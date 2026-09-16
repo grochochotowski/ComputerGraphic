@@ -4,6 +4,8 @@ A collection of C# and WPF applications exploring fundamental computer graphics,
 
 ## Contents
 
+The course required completion of eight out of nine laboratory assignments. Lab 8 was not selected, which is why the repository contains Labs 1–7 and Lab 9.
+
 - **Lab 1 — Drawing primitives:** interactive creation and editing of lines, rectangles and circles, with JSON save and load support.
 - **Lab 2 — PPM image viewer:** decoding of P3 and P6 PPM files, pixel inspection and JPEG export with configurable quality.
 - **Lab 3 — Colour models:** RGB–CMYK conversion and an interactive 3D RGB colour cube with slice visualization.
