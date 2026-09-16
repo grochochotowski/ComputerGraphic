@@ -43,16 +43,16 @@ namespace GK.Lab6.Algorithms
             int numerator = longest >> 1;
 
             // Cache bitmap dimensions
-            int bmpW = bitmap.PixelWidth;
+            int bitmapWidth = bitmap.PixelWidth;
 
             // Offsets for row movement
-            int bmpWdy1 = bmpW * dy1;
-            int bmpWdy2 = bmpW * dy2;
+            int rowOffset1 = bitmapWidth * dy1;
+            int rowOffset2 = bitmapWidth * dy2;
 
             unsafe
             {
                 // Pointer to the starting pixel
-                int* pBackBuffer = (int*)bitmap.BackBuffer + x + bmpW * y;
+                int* pBackBuffer = (int*)bitmap.BackBuffer + x + bitmapWidth * y;
 
                 // Iterate over the major axis
                 for (int i = 0; i <= longest; i++)
@@ -70,14 +70,14 @@ namespace GK.Lab6.Algorithms
                         numerator -= longest;
                         x += dx1;
                         y += dy1;
-                        pBackBuffer += dx1 + bmpWdy1;
+                        pBackBuffer += dx1 + rowOffset1;
                     }
                     else
                     {
                         // Otherwise, only move on the major axis
                         x += dx2;
                         y += dy2;
-                        pBackBuffer += dx2 + bmpWdy2;
+                        pBackBuffer += dx2 + rowOffset2;
                     }
                 }
             }

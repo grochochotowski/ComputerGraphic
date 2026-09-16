@@ -142,18 +142,18 @@ namespace GK.Lab7.Geometry
 
             // Initialize the numerator
             int numerator = longest >> 1;
-            int bmpW = bitmap.PixelWidth, bmpH = bitmap.PixelHeight;
-            int bmpWdy1 = bmpW * dy1, bmpWdy2 = bmpW * dy2;
+            int bitmapWidth = bitmap.PixelWidth, bitmapHeight = bitmap.PixelHeight;
+            int rowOffset1 = bitmapWidth * dy1, rowOffset2 = bitmapWidth * dy2;
 
             // Draw pixels
             unsafe
             {
-                int* pBackBuffer = (int*)bitmap.BackBuffer + x + bmpW * y;
+                int* pBackBuffer = (int*)bitmap.BackBuffer + x + bitmapWidth * y;
 
                 // Loop through the longest direction
                 for (int i = 0; i <= longest; i++)
                 {
-                    if (x >= 0 && x < bmpW && y >= 0 && y < bmpH) // Check bounds
+                    if (x >= 0 && x < bitmapWidth && y >= 0 && y < bitmapHeight) // Check bounds
                     {
                         *pBackBuffer = color;
                         bitmap.AddDirtyRect(new Int32Rect(x, y, 1, 1));
@@ -164,13 +164,13 @@ namespace GK.Lab7.Geometry
                         numerator -= longest;
                         x += dx1;
                         y += dy1;
-                        pBackBuffer += dx1 + bmpWdy1;
+                        pBackBuffer += dx1 + rowOffset1;
                     }
                     else // Move in the longest direction
                     {
                         x += dx2;
                         y += dy2;
-                        pBackBuffer += dx2 + bmpWdy2;
+                        pBackBuffer += dx2 + rowOffset2;
                     }
                 }
             }
