@@ -1,0 +1,81 @@
+<Window x:Class="GK.Lab9.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GK.Lab9"
+        mc:Ignorable="d"
+        Title="GK Lab 9 - Image Analysis" Height="600" Width="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Control Panel -->
+        <StackPanel Grid.Column="0" Margin="10">
+            <Button Content="Load Image" Click="LoadImage_Click" Margin="0,0,0,10"/>
+
+            <GroupBox Header="HSV Range Selection" Margin="0,0,0,10">
+                <StackPanel>
+                    <TextBlock Text="Hue (0-360)"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Slider x:Name="HueMinSlider" Grid.Row="0" Minimum="0" Maximum="360" Value="60" SmallChange="1" LargeChange="10" ValueChanged="Slider_ValueChanged"/>
+                        <Slider x:Name="HueMaxSlider" Grid.Row="1" Minimum="0" Maximum="360" Value="180" SmallChange="1" LargeChange="10" ValueChanged="Slider_ValueChanged"/>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding ElementName=HueMinSlider, Path=Value, StringFormat={}{0:F0}}" Width="50"/>
+                        <TextBlock Text=" - "/>
+                        <TextBlock Text="{Binding ElementName=HueMaxSlider, Path=Value, StringFormat={}{0:F0}}" Width="50"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Saturation (0-100)" Margin="0,10,0,0"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Slider x:Name="SaturationMinSlider" Grid.Column="0" Minimum="0" Maximum="100" Value="20" SmallChange="1" LargeChange="10" ValueChanged="Slider_ValueChanged"/>
+                        <Slider x:Name="SaturationMaxSlider" Grid.Column="1" Minimum="0" Maximum="100" Value="100" SmallChange="1" LargeChange="10" ValueChanged="Slider_ValueChanged"/>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding ElementName=SaturationMinSlider, Path=Value, StringFormat={}{0:F0}}" Width="50"/>
+                        <TextBlock Text=" - "/>
+                        <TextBlock Text="{Binding ElementName=SaturationMaxSlider, Path=Value, StringFormat={}{0:F0}}" Width="50"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Value (0-100)" Margin="0,10,0,0"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Slider x:Name="ValueMinSlider" Grid.Column="0" Minimum="0" Maximum="100" Value="20" SmallChange="1" LargeChange="10" ValueChanged="Slider_ValueChanged"/>
+                        <Slider x:Name="ValueMaxSlider" Grid.Column="1" Minimum="0" Maximum="100" Value="100" SmallChange="1" LargeChange="10" ValueChanged="Slider_ValueChanged"/>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding ElementName=ValueMinSlider, Path=Value, StringFormat={}{0:F0}}" Width="50"/>
+                        <TextBlock Text=" - "/>
+                        <TextBlock Text="{Binding ElementName=ValueMaxSlider, Path=Value, StringFormat={}{0:F0}}" Width="50"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            
+            <Button Content="Analyze" Click="Analyze_Click" FontWeight="Bold" Margin="0,5,0,10"/>
+
+            <TextBlock Text="Analysis Result:" FontWeight="Bold"/>
+            <TextBlock x:Name="ResultTextBlock" Text="Load an image to begin." TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <!-- Image Display Area -->
+        <Border Grid.Column="1" BorderThickness="1" BorderBrush="SteelBlue" Margin="10">
+            <Viewbox>
+                <Image x:Name="DisplayImage" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+            </Viewbox>
+        </Border>
+    </Grid>
+</Window>
