@@ -1,0 +1,103 @@
+﻿<Window x:Class="GK.Lab5.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:local="clr-namespace:GK.Lab5"
+  mc:Ignorable="d"
+  Title="GK Lab 5 - Histogram Operations and Binarization" Height="auto" Width="auto"
+  DataContext="{Binding RelativeSource={RelativeSource Self}}"
+  MouseWheel="Window_MouseWheel" MouseDown="Window_MouseDown">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="auto"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <StackPanel Grid.Column="0" Orientation="Vertical">
+      <StackPanel.Resources>
+        <Style TargetType="TextBox" x:Key="TextField">
+          <Setter Property="VerticalAlignment" Value="Center"/>
+          <Setter Property="Grid.Column" Value="1"/>
+        </Style>
+      </StackPanel.Resources>
+      <Button Content="Load" Click="Load_Click"/>
+      <Button Content="Load Last" Click="LoadLast_Click"/>
+      <Separator/>
+      <Label Content="Scale" HorizontalAlignment="Center"/>
+      <TextBlock x:Name="ScaleTextBlock" HorizontalAlignment="Center"/>
+      <Separator/>
+      <GroupBox Header="Pixel">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+          </Grid.RowDefinitions>
+          <Grid.Resources>
+            <Style TargetType="TextBox" BasedOn="{StaticResource TextField}">
+              <Setter Property="IsReadOnly" Value="True"/>
+            </Style>
+          </Grid.Resources>
+          <Label Grid.Column="0" Grid.Row="0" Content="X"/>
+          <TextBox Grid.Row="0" x:Name="XTextBox"/>
+          <Label Grid.Column="0" Grid.Row="1" Content="Y"/>
+          <TextBox Grid.Row="1" x:Name="YTextBox"/>
+          <Label Grid.Column="0" Grid.Row="2" Content="R"/>
+          <TextBox Grid.Row="2" x:Name="RTextBox"/>
+          <Label Grid.Column="0" Grid.Row="3" Content="G"/>
+          <TextBox Grid.Row="3" x:Name="GTextBox"/>
+          <Label Grid.Column="0" Grid.Row="4" Content="B"/>
+          <TextBox Grid.Row="4" x:Name="BTextBox"/>
+        </Grid>
+      </GroupBox>
+      <Separator/>
+
+      <GroupBox Header="Normalization">
+        <StackPanel Orientation="Vertical">
+          <RadioButton Content="Histogram Stretching" GroupName="Norm"
+            x:Name="StretchingRadioButton"/>
+          <RadioButton Content="Histogram Equalization" GroupName="Norm"
+            x:Name="EqualizationRadioButton"/>
+        </StackPanel>
+      </GroupBox>
+      <Button Content="Apply" Click="PerformNormalization_Click"/>
+      <Separator/>
+
+      <GroupBox Header="Binarization">
+        <StackPanel Orientation="Vertical">
+          <RadioButton Content="Manual" GroupName="Bin"
+            x:Name="ManualRadioButton" Checked="Bin_Checked"/>
+          <RadioButton Content="Percent Black Selection" GroupName="Bin"
+            x:Name="PercentBlackSelectionRadioButton" Checked="Bin_Checked"/>
+          <RadioButton Content="Mean Iterative Selection" GroupName="Bin"
+            x:Name="MeanIterativeSelectionRadioButton" Checked="Bin_Checked"/>
+          <RadioButton Content="Entropy Selection" GroupName="Bin"
+            x:Name="EntropySelectionRadioButton" Checked="Bin_Checked"/>
+          <RadioButton Content="Minimum Error" GroupName="Bin"
+            x:Name="MinimumErrorRadioButton" Checked="Bin_Checked"/>
+          <RadioButton Content="Fuzzy Minimum Error" GroupName="Bin"
+            x:Name="FuzzyMinimumErrorRadioButton" Checked="Bin_Checked"/>
+        </StackPanel>
+      </GroupBox>
+      <Separator/>
+      <Label x:Name="ThresholdLabel" Content="Threshold"/>
+      <TextBox Grid.Row="0" x:Name="ThresholdTextBox"/>
+      <Button Content="Apply" Click="PerformBinarization_Click"/>
+    </StackPanel>
+
+    <Border Grid.Column="1" x:Name="Border" BorderThickness="1" BorderBrush="Black"
+      ClipToBounds="True">
+      <Image x:Name="Image" MaxHeight="420" MaxWidth="670"
+        MouseLeftButtonDown="Image_MouseLeftButtonDown"
+        MouseLeftButtonUp="Image_MouseLeftButtonUp"
+        MouseMove="Image_MouseMove"
+        RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+    </Border>
+  </Grid>
+</Window>
