@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="GK.Lab3.Views.ConversionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- LEFT PANEL: RGB and CMYK controls -->
+        <StackPanel Grid.Column="0" Margin="0,0,20,0">
+
+            <!-- RGB section -->
+            <TextBlock Text="RGB → CMYK" FontSize="20" Margin="0 0 0 10"/>
+
+            <!-- R -->
+            <TextBlock Text="R" Margin="0 5 0 0"/>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="SliderR" Minimum="0" Maximum="255" Width="180" 
+                        ValueChanged="RGB_SliderChanged"/>
+                <TextBox x:Name="BoxR" Width="50" Margin="10 0 0 0"
+                         TextChanged="RGB_TextChanged"/>
+            </StackPanel>
+
+            <!-- G -->
+            <TextBlock Text="G" Margin="0 5 0 0"/>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="SliderG" Minimum="0" Maximum="255" Width="180"
+                        ValueChanged="RGB_SliderChanged"/>
+                <TextBox x:Name="BoxG" Width="50" Margin="10 0 0 0"
+                         TextChanged="RGB_TextChanged"/>
+            </StackPanel>
+
+            <!-- B -->
+            <TextBlock Text="B" Margin="0 5 0 0"/>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="SliderB" Minimum="0" Maximum="255" Width="180"
+                        ValueChanged="RGB_SliderChanged"/>
+                <TextBox x:Name="BoxB" Width="50" Margin="10 0 0 0"
+                         TextChanged="RGB_TextChanged"/>
+            </StackPanel>
+
+
+            <Separator Margin="0 15"/>
+
+            <!-- CMYK section -->
+            <TextBlock Text="CMYK → RGB" FontSize="20" Margin="0 0 0 10"/>
+
+            <!-- C -->
+            <TextBlock Text="C" Margin="0 5 0 0"/>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="SliderC" Minimum="0" Maximum="1" Width="180"
+                        ValueChanged="CMYK_SliderChanged"/>
+                <TextBox x:Name="BoxC" Width="50" Margin="10 0 0 0"
+                         TextChanged="CMYK_TextChanged"
+                         LostFocus="CMYK_LostFocus"/>
+            </StackPanel>
+
+            <!-- M -->
+            <TextBlock Text="M" Margin="0 5 0 0"/>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="SliderM" Minimum="0" Maximum="1" Width="180"
+                        ValueChanged="CMYK_SliderChanged"/>
+                <TextBox x:Name="BoxM" Width="50" Margin="10 0 0 0"
+                         TextChanged="CMYK_TextChanged"
+                         LostFocus="CMYK_LostFocus"/>
+            </StackPanel>
+
+            <!-- Y -->
+            <TextBlock Text="Y" Margin="0 5 0 0"/>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="SliderY" Minimum="0" Maximum="1" Width="180"
+                        ValueChanged="CMYK_SliderChanged"/>
+                <TextBox x:Name="BoxY" Width="50" Margin="10 0 0 0"
+                         TextChanged="CMYK_TextChanged"
+                         LostFocus="CMYK_LostFocus"/>
+            </StackPanel>
+
+            <!-- K -->
+            <TextBlock Text="K" Margin="0 5 0 0"/>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="SliderK" Minimum="0" Maximum="1" Width="180"
+                        ValueChanged="CMYK_SliderChanged"/>
+                <TextBox x:Name="BoxK" Width="50" Margin="10 0 0 0"
+                         TextChanged="CMYK_TextChanged"
+                         LostFocus="CMYK_LostFocus"/>
+            </StackPanel>
+
+        </StackPanel>
+
+
+        <!-- RIGHT PANEL: Color preview -->
+        <Border Grid.Column="1" 
+                x:Name="ColorPreview"
+                Width="350" Height="350"
+                Background="Black"
+                BorderBrush="Gray" BorderThickness="2"
+                CornerRadius="10"/>
+    </Grid>
+</UserControl>
